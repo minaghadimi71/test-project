@@ -1,0 +1,169 @@
+<ng-template appPlaceHolder></ng-template>
+<div class="theme">
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <form #serverForm="ngForm"
+            (ngSubmit)="addPost()">
+        <div class="form-group">
+          <label for="name"
+                 class="control-label">
+            Name:
+          </label>
+          <input type="text"
+                 ngModel
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 required
+                 #name="ngModel">
+          <div class="invalid-feedback d-inline"
+               *ngIf="name.invalid && name.touched">
+            Name is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description"
+                 class="control-label">
+            Description:
+          </label>
+          <input type="text" ngModel
+                 class="form-control"
+                 id="description"
+                 name="description"
+                 required
+                 #description="ngModel">
+          <div class="invalid-feedback d-inline"
+               *ngIf="description.invalid && description.touched">
+            Description is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="status"
+                 class="control-label">
+            Status:
+          </label>
+          <input type="text" ngModel
+                 class="form-control"
+                 id="status"
+                 name="status"
+                 required
+                 #status="ngModel">
+          <div class="invalid-feedback d-inline"
+               *ngIf="status.invalid && status.touched">
+            Status is required.
+          </div>
+        </div>
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="!serverForm.valid">
+          Add Server
+        </button>
+      </form>
+      <div class="merge-mab mt-3">
+        <p>Merge map example:</p>
+        <div class="form-group">
+          <input type="text" id="name1" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" id="name2"  class="form-control">
+        </div>
+        <p id="name3"></p>
+      </div>
+      <div class="switch-map mt-3">
+        <p>switchMap example:</p>
+        <button id="btn2"
+                class="btn btn-primary"
+                type="button">
+          switchMap
+        </button>
+      </div>
+      <div class="pluck mt-3">
+     <input type="text" id="pluck" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <input type="text"
+                 [(ngModel)]="searchParam"
+                 class="form-control mb-3"
+                 placeholder="Search..."
+                 (input)="searching($event)">
+        </div>
+        <div class="col-md-6">
+          <select [(ngModel)]="sortable" (change)="changeSort()" class="form-control page-select-box">
+            <option [value]="'name'">Name</option>
+            <option [value]="'status'">Status</option>
+          </select>
+
+        </div>
+      </div>
+      <table class="table
+      table-primary">
+        <thead>
+        <th>Name :</th>
+        <th>Desc :</th>
+        <th>status :</th>
+        <th>Date :</th>
+        <th>Delete :</th>
+        </thead>
+        <tbody style="position: relative">
+        <tr *ngFor="let post of posts | Filter: searchParam: 'status'"
+            mwlDroppable mwlDraggable style=" position: absolute"
+            (dragEnd)="dragEnd($event, post)"
+            (drop)="dropItem($event, post.row)"
+            [style.top]="calculateTop(post)"
+            [style.z-index]="calculateZ(post)"
+            (dragStart)="dragEnd($event, post)">
+          <td>{{post.name}}</td>
+          <td>{{post.description}}</td>
+          <td>{{post.status}}</td>
+          <td>{{post.date | date: 'shortTime'}}</td>
+          <td>
+            <button class="btn" (click)="deletePost(post.id)"
+                    [disabled]="disableDelete"
+                    [ngClass]="{'disableDelete': disableDelete}">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--<div class="container scss mt-3">-->
+<!--  <p class="main">test sass</p>-->
+<!--  <p class="main-content_p">mina</p>-->
+<!--  <div class="main-content">-->
+<!--    <p class="main-content_p">mina</p>-->
+<!--  </div>-->
+<!--  <div class="flex">-->
+<!--    <p>a</p>-->
+<!--    <p>b</p>-->
+<!--  </div>-->
+<!--  <div class="flex-1">-->
+<!--    <p>event.target here is an HTMLElement-->
+<!--      which is the parent of all HTML elements-->
+<!--      , but isn't guaranteed to have the-->
+<!--      alue. TypeScript detects this and thro-->
+<!--      ws the error. Cast event.target to t-->
+<!--      he appropriate HTML element to ensur-->
+<!--      e it is HTMLInputElement which d-->
+<!--      oes have a value property:</p>-->
+<!--    <p>event.target here is an HTMLElement-->
+<!--      which is the parent of all HTML elements-->
+<!--      , but isn't guaranteed to have the-->
+<!--      alue. TypeScript detects this and thro-->
+<!--      ws the error. Cast event.target to t-->
+<!--      he appropriate HTML element to ensur-->
+<!--      e it is HTMLInputElement which d-->
+<!--      oes have a value property:</p>-->
+<!--  </div>-->
+<!--</div>-->
+</div>
+<app-paginator [pageNumbers]="pageNumbers"
+               [sort]="sortable"
+               (data)="getPosts($event)">
+</app-paginator>

@@ -1,0 +1,82 @@
+<ng-template appPlaceHolder></ng-template>
+<nav class="navbar navbar-expand-lg navbar-dark bg-light" >
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler"
+          type="button" data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse"
+       id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link "
+         routerLink="/"
+         routerLinkActive="true"
+         [routerLinkActiveOptions]="{exact: true}">Home
+        <span class="sr-only">(current)</span></a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="true">Users</a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/posts" routerLinkActive="true">Posts</a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/category">Category</a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/drag-drop" routerLinkActive="true">Drag and drop</a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/template" routerLinkActive="true">Form-template</a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/reactive" routerLinkActive="true">Form-reactive</a>
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/formly" routerLinkActive="true">Formly</a>
+    </div>
+    <div class="navbar-nav">
+      <a  class="nav-item nav-link" routerLink="/material" routerLinkActive="true">Material</a>
+    </div>
+    <div class="navbar-nav">
+      <a  class="nav-item nav-link" routerLink="/builder" routerLinkActive="true">Form-Builder</a>
+    </div>
+    <div class="navbar-nav">
+      <a  class="nav-item nav-link" routerLink="/total" routerLinkActive="true">Total</a>
+    </div>
+    <div class="navbar-nav">
+      <a  class="nav-item nav-link" routerLink="/ware" routerLinkActive="true">Ware</a>
+    </div>
+    <div class="navbar-nav">
+      <a  class="nav-item nav-link" routerLink="/manageBook" routerLinkActive="true">Books</a>
+    </div>
+    <div class="navbar-nav" *ngIf="isMobile">
+      <a class="nav-item nav-link" (click)="saveData()">save data</a>
+    </div>
+    <div class="navbar-nav" *ngIf="isMobile">
+      <a class="nav-item nav-link" (click)="removeData()">back</a>
+    </div>
+    <div class="navbar-nav" *ngIf="isMobile">
+      <a class="nav-item nav-link">Log out</a>
+    </div>
+  </div>
+  <div class="dropdown" *ngIf="!isMobile">
+    <a class="nav-item nav-link dropdown-link text-white btn"
+       id="dropdownMenuButton"
+       data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+      {{email}}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" (click)="saveData()">save data</a>
+      <a class="dropdown-item" (click)="removeData()">back</a>
+      <a class="dropdown-item" (click)="changePassword()">change Password</a>
+      <a class="dropdown-item" (click)="logOutUser()">Log out</a>
+    </div>
+  </div>
+</nav>
+

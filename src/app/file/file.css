@@ -1,0 +1,54 @@
+.container-modal {
+  padding: 0 20px 0;
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+h3.modal-title {
+  padding-top: 20px;
+  padding-bottom: 7px;
+}
+
+button.close.close-head {
+  font-size: 25px;
+  padding-top: 20px;
+  padding-bottom: 7px;
+}
+}
+.content{
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.content-action {
+  padding-top: 7px;
+  padding-bottom: 20px;
+}
+.list-category{
+  padding-bottom: 7px;
+  display: flex;
+  flex-wrap: wrap;
+.caynac-list{
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+}
+.fa.caynac-btn-icons, .la, .la{
+  font-size: 25px !important;
+}
+}
+:host {
+::ng-deep {
+.treeview-container .row-item .fa {
+  margin-right: 0;
+  width: 1.8rem !important;
+}
+}
+.kt-mat-dialog-container__wrapper .mat-dialog-container {
+  overflow-x: scroll;
+  max-height: 500px;
+}
+}
+.mina {
+  margin-left: 25px;
+}

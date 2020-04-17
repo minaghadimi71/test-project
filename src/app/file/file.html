@@ -1,0 +1,106 @@
+<div class="container-modal">
+  <div class="flex-container">
+    <h3 class="modal-title">Add category</h3>
+    <button
+      type="button"
+      class="close close-head"
+      (click)="closeDialogRef()">
+      &times;
+    </button>
+  </div>
+</div>
+<hr>
+<div class="container-modal" *ngIf="selectedItems.length">
+  <div class="content">
+    <div class="list-category" *ngFor="let selectedItem of selectedItems">
+      <div class="caynac-list">
+				<span *ngIf="getParentsOfChild(selectedItem)[1]">
+					{{getParentsOfChild(selectedItem)[1].name}}
+				</span>
+        <i class="fa fa-angle-right ml-3"
+           *ngIf="getParentsOfChild(selectedItem)[1]">
+        </i>
+        <span
+          *ngIf="getParentsOfChild(selectedItem)[0]" class="ml-3">
+					{{getParentsOfChild(selectedItem)[0].name}}
+				</span>
+        <i class="fa fa-angle-right ml-3"
+           *ngIf="getParentsOfChild(selectedItem)[0]">
+        </i>
+        <span *ngIf="getParentsOfChild(selectedItem)[0]"
+              class="ml-3">
+							{{selectedItem.name}}
+						</span>
+        <button type="button" class="close ml-3" (click)="removeItem(selectedItem)" [disabled]="disable">
+          &times;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr *ngIf="selectedItems.length">
+<div class="container-modal">
+  <div class="content">
+    <div class="form-group">
+      <label>
+        <strong>ngx-treeview</strong>
+      </label>
+      <ng-template #itemTemplate
+                   let-item="item"
+                   let-onCollapseExpand="onCollapseExpand"
+                   let-onCheckedChange="onCheckedChange">
+        <div class="form-inline row-item">
+          <i class="la"
+             *ngIf="item.children"
+             (click)="item.collapsed = !item.collapsed"
+             [class.la-plus-square]="item.collapsed"
+             [class.la-minus-square]="!item.collapsed"></i>
+          <div class="mina" *ngIf="!item.children"></div>
+          <i  class="fa fa-folder-open caynac-btn-icons ml-3"
+              *ngIf="item.children && !item.collapsed"
+          ></i>
+          <i class="fa fa-folder caynac-btn-icons ml-3"
+             *ngIf="item.children && item.collapsed"
+          ></i>
+          <div class="flex-container">
+            <div>
+              <label class="form-check-label ml-3">
+                {{item.text}}
+              </label>
+            </div>
+            <div>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [(ngModel)]="item.checked"
+                (ngModelChange)="onCheckedChange()"
+                [disabled]="(disableCheckbox(item) || item.disabled) && !item.checked"
+                (change)="addItem(item)">
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ngx-treeview
+        [config]="config"
+        [items]="items"
+        (filterChange)="onFilterChange($event)"
+        [itemTemplate]="itemTemplate"
+        (selectedChange) = categoryPush($event)
+
+      >
+      </ngx-treeview>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container-modal">
+  <div class="content-action pull-right">
+    <button (click)="closeDialogRef()" class="caynac-btn caynac-btn-orange register text-uppercase">
+      <i class="la la-check-circle"></i>
+      <span class="ml-1">ADD CATEGORY</span>
+    </button>
+  </div>
+</div>
+
+
+

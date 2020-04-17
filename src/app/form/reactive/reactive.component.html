@@ -1,0 +1,161 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>
+        <button type="button" (click)="backToTemplate()" class="btn">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        Reactive form example
+      </h2>
+      <div class="card">
+        <form [formGroup]="registerForm" (ngSubmit)="onsubmite()">
+          <div class="form-group">
+            <label for="name">
+              Name:
+            </label>
+            <input type="text" id="name"
+                   class="form-control" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="surname">
+              Surname:
+            </label>
+            <input type="text" id="surname"
+                   class="form-control"
+                   formControlName="surname"
+                   [ngClass]="{'border-red': (resetHtml| async)}">
+            <div class="invalid-feedback d-inline"
+                 *ngIf="!registerForm.get('surname').valid && registerForm.get('surname').touched || !registerForm.get('surname').valid && (resetHtml |async)">
+                <span *ngIf="registerForm.get('surname').errors && registerForm.get('surname').errors['required']">
+                please enter surname
+              </span>
+              <span
+                *ngIf="registerForm.get('surname').errors && registerForm.get('surname').errors['forbiddenSurname']">
+                this surname is invalid
+              </span>
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col-md-6">
+              <label for="mazrab">
+                Members:
+              </label>
+              <input type="number" id="mazrab"
+                     class="form-control" formControlName="mazrab" (input)="clearMember()">
+            </div>
+            <div class="col-md-6">
+              <label for="member">
+                Members:
+              </label>
+              <input type="number" id="member"
+                     class="form-control" formControlName="member" appCustomNumberValidator
+                     [appNumber]="registerForm.get('mazrab').value"
+                     [ngClass]="{'border-red': (resetHtml| async)}">
+            </div>
+
+          </div>
+          <div class="form-row mt-3" formGroupName="address">
+            <div class="col-md-6">
+              <label for="country">
+                Country:
+              </label>
+              <input type="text" id="country"
+                     class="form-control"
+                     formControlName="country"
+                     [ngClass]="{'border-red': (resetHtml| async)}">
+            </div>
+            <div class="col-md-6">
+              <label for="city">
+                city:
+              </label>
+              <input type="text" id="city"
+                     class="form-control"
+                     formControlName="city"
+                     [ngClass]="{'border-red': (resetHtml| async)}">
+            </div>
+          </div>
+          <div class="invalid-feedback d-inline"
+               *ngIf="!registerForm.get('address').valid && registerForm.get('address').touched || !registerForm.get('address').valid && (resetHtml |async)">
+            address is required!
+          </div>
+          <div class="form-group mt-3">
+            <label>
+              Gender:
+            </label>
+            <div class="custom-control custom-radio">
+              <div *ngFor="let gender of genders">
+                <input type="radio"
+                       [id]="gender"
+                       class="custom-control-input"
+                       [value]="gender"
+                       name="gender"
+                       formControlName="gender">
+                <label class="custom-control-label"
+                       [for]="gender">
+                  {{gender}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div formArrayName="friends">
+            <button type="button" class="btn btn-primary mb-3 mr-3" (click)="addFriends()">Add Friends</button>
+            <button type="button" class="btn btn-primary mb-3 mr-3" (click)="setValue()">setValue</button>
+            <button type="button" class="btn btn-primary mb-3" (click)="patchValue()">patchValue</button>
+            <div class="form-group" *ngFor="let friend of friends.controls; let i=index">
+              <label>
+                Friends - {{i}}
+              </label>
+              <input type="text"
+                     class="form-control"
+                     [formControlName]="i" [ngClass]="{'border-red': (resetHtml| async)}">
+              <div class="invalid-feedback d-inline"
+                   *ngIf="!friends.controls[i].valid &&
+                   friends.controls[i].touched || !friends.controls[i].valid && (resetHtml| async)">
+          <span *ngIf="friends.controls[i].errors['forbiddenName']">
+            Please enter a valid value
+          </span>
+                <span *ngIf="friends.controls[i].errors['required']">
+                    Please enter value
+          </span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || registerForm.pending">
+            submit
+          </button>
+          <!--          [disabled]="registerForm.invalid"-->
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="getIsShow()">
+      <h2>Data of user:</h2>
+      <div class="card">
+        <p *ngIf="user.name">Name: {{user.name}}</p>
+        <p *ngIf="user.surname">Surname: {{user.surname}}</p>
+        <p *ngIf="user.member">Member: {{user.member}}</p>
+        <!--        <p *ngIf="user.mazrab">Mazrab: {{user.mazrab}}</p>-->
+        <p *ngIf="user.address.country">Country: {{user.address.country}}</p>
+        <p *ngIf="user.address.city">City: {{user.address.city}}</p>
+        <p *ngIf="user.gender">Gender: {{user.gender}}</p>
+        <div *ngFor="let friend of user.friends">
+          <p *ngIf="friend">Friend: {{friend}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="isShow">
+      <h2>Data of user:</h2>
+      <div class="card">
+        <p>Name: {{users.name}}</p>
+        <p>Surname: {{users.surname}}</p>
+        <p>Member: {{users.member}}</p>
+<!--        <p>Mazrab: {{users.mazrab}}</p>-->
+        <p>Country: {{users.address.country}}</p>
+        <p>City: {{users.address.city}}</p>
+        <p>Gender: {{users.gender}}</p>
+        <div *ngFor="let friend of users.friends">
+          <p>Friend: {{friend}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

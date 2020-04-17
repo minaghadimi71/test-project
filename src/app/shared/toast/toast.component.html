@@ -1,0 +1,10 @@
+<div class="toast" id="toast"
+     [ngClass]="{'succeed': (color === 'succeed'? true: false),
+     'error': (color === 'error' ? true: false), 'warning': (color === 'warning' ? true: false) }">
+  <div class="toast-header">
+    {{header}}
+  </div>
+  <div class="toast-body">
+    {{body}}
+  </div>
+</div>

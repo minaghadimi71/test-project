@@ -1,0 +1,11 @@
+<h3>Please add food or drink</h3>
+<input type="text" class="form-control" [(ngModel)]="input" (input)="search()">
+<!--you can use # (local reference) and get it to the function (example: someInput) for all tag in Html...-->
+<!--<input type="text" class="form-control" #inputContent>-->
+<!--<input type="text" class="form-control" #someInput>-->
+<!--(click)="addDrink(someInput)"-->
+<div class="action mt-3">
+  <button type="button" class="btn btn-primary mr-3" (click)="addFood()" [disabled]="!input">Add Food</button>
+  <button type="button" class="btn btn-primary mr-3" (click)="addDrink()" [disabled]="!input">Add Drink</button>
+</div>
+

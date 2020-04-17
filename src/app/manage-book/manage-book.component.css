@@ -1,0 +1,63 @@
+.bookImage{
+  width: 250px;
+  height: 250px;
+}
+input.ng-touched.ng-invalid{
+  border: 1px solid red;
+}
+::ng-deep .mat-tooltip  {
+  white-space: pre-line    !important;
+  background-color: white;
+}
+:host ::ng-deep .tooltip.bottom .tooltip-arrow {
+  border: 1px solid red;
+  border-bottom: none;
+  border-right: none;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  background: pink;
+}
+:host ::ng-deep .tooltip-inner {
+  background-color: pink !important;
+  border: 1px solid red;
+  color: black;
+}
+:host ::ng-deep .tooltip.bottom .tooltip-arrow::before {
+  top: 0;
+  border-width: 0.4rem 0.4rem 0;
+  border-top-color: pink !important;
+}
+.custom-notification {
+  background-color: #3b5998;
+}
+
+th {
+  font-weight: bold;
+  color: rosybrown;
+  font-size: 1.1rem;
+}
+
+th:first-child {
+  width: 20px;
+  font-size: 1.5rem;
+}
+
+td {
+  color: white;
+}
+
+td:nth-child(5) a {
+  color: rosybrown !important;
+  font-size: 1.5rem;
+}
+
+.la-bell {
+  position: absolute;
+  top: 13px;
+  left: 17px;
+}
+
+#payment-title {
+  font-size: 1.8rem !important;
+}

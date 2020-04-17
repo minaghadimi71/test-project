@@ -1,0 +1,32 @@
+$color-dark: #000;
+$color-red: red;
+$color-primary: blue;
+$gray: gray;
+$mobile: 800px;
+$font-weight: (
+"regular": 400,
+"normal": 500,
+"bold": 900,
+);
+@function weight($weight-name) {
+@return map-get($font-weight, $weight-name);
+}
+@mixin backBlue {
+  background: gray;
+}
+@mixin flex-style($space-around) {
+  display: flex;
+  flex-direction: row;
+  justify-content: $space-around;
+}
+@mixin theme($light: true) {
+  background: darken($color-dark, 100%);
+  @if $light {
+    background: lighten($gray, 20%);
+  }
+}
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}

@@ -1,0 +1,15 @@
+#toast {
+  position: fixed;
+  right: 20px;
+  top: 61px;
+  width: 300px;
+}
+.succeed{
+  background-color: green;
+}
+.error{
+  background-color: red;
+}
+.warning{
+  background-color: orangered;
+}

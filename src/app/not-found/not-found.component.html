@@ -1,0 +1,45 @@
+<div class="not-found">
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <form class="login100-form validate-form" #goToForm="ngForm" (ngSubmit)="goToServer()">
+					<span class="login100-form-title mb-2">
+           {{message}}
+					</span>
+          <div class="form-group">
+            <label for="time">
+              Time to finished login:
+            </label>
+            <input type="number"
+                   ngModel
+                   #numberServer="ngModel"
+                   name="numberServer"
+                   class="form-control" id="time"
+                   required appMaxMinValidator [maxNumber]="15" [minNumber]="1">
+            <div class="invalid-feedback d-inline" *ngIf="!numberServer.valid && numberServer.touched">
+              <span *ngIf="numberServer?.errors.required">
+                This field is required.
+              </span>
+              <span *ngIf="numberServer?.errors.maxValidator && !numberServer?.errors.required">
+                Max time should be 15 minutes.
+              </span>
+              <span *ngIf="numberServer?.errors.minValidator && !numberServer?.errors.required">
+                Min time should be 1 minutes.
+              </span>
+            </div>
+          </div>
+          <div class="container-login100-form-btn mb-2">
+            <button type="submit"
+                    class="login100-form-btn"
+                    [disabled]="!goToForm.valid"
+                    [ngClass]="{'disable': !goToForm.valid}">go to server page
+            </button>
+          </div>
+        </form>
+        <div class="login100-more">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

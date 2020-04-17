@@ -1,0 +1,9 @@
+.card{
+  padding: 20px;
+}
+input.ng-touched.ng-invalid{
+  border-color: red;
+}
+input.ng-invalid.border-red{
+  border-color: red;
+}

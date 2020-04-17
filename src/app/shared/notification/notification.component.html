@@ -1,0 +1,73 @@
+<div class="container-modal">
+  <div class="flex-container">
+    <h3 class="modal-title">Add Custom Notification</h3>
+    <button type="button" class="close close-head" (click)="closeDialogRef()">
+      <i class="la la-times"></i>
+    </button>
+  </div>
+</div>
+<hr>
+<div class="container-modal">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Industry</label>
+          <select name="industry"
+                  class="form-control country-select-box"
+                  [(ngModel)]="notification.industry"
+                  required>
+            <optgroup *ngFor="let parent of data.allCategories" [label]="parent.name">
+              <option *ngFor="let child of parent.books" [value]="child.id">
+                {{ child.name }}
+              </option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Country</label>
+          <select name="country" id="country"
+                  class="form-control country-select-box"
+                  [(ngModel)]="notification.country"
+                  required>
+            <option [ngValue]="null" selected>All countries
+              <!-- TODO: Translation-->
+            </option>
+            <ng-container *ngFor="let country of data.countries">
+              <option value="{{country.id}}">{{country.name}}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>How often would you like to get this notification?</label>
+          <select name="country"
+                  class="form-control country-select-box"
+                  [(ngModel)]="notification.duration"
+                  required>
+            <option [ngValue]="null" selected disabled>Select</option>
+            <option [ngValue]="1">Once per day</option>
+            <option [ngValue]="7">Once per week</option>
+            <option [ngValue]="14">Once per 2 weeks</option>
+            <option [ngValue]="30">Once per month</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container-modal">
+  <div class="content-action">
+    <button class="btn btn-sm caynac-btn-orange text-uppercase pull-right mb-4">
+      <i class="la la-check-circle"></i>
+      <span class="ml-1 text-uppercase"  (click)="data.callback(notification)">add notification</span>
+    </button>
+  </div>
+</div>
+
+
+

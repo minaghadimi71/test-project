@@ -1,0 +1,18 @@
+<div style="width: 400px; margin: 2em">
+  <label for="comment">Comment</label>
+  <textarea name="comment" class="form-control" id="comment" #comment></textarea>
+  <button style="margin-top: 1em" class="btn btn-primary" (click)="addComment()">Add Comment</button>
+</div>
+<div style="width: 400px; margin: 2em">
+  <div *ngIf="comments != null">
+    <div *ngFor="let c of comments">
+      <p>{{c.comment}}</p>
+      <app-star [rating]="c.numberOfComment != 0 ? c.star/ c.numberOfComment: 0"></app-star>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary" (click)="logIn()">log in</button>
+<button class="btn btn-primary" (click)="logOut()">log out</button>
+
+

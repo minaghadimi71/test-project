@@ -1,0 +1,185 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="profileForm" (ngSubmit)="onsubmite()">
+        <div class="form-group">
+          <label for="name1">
+            Name:
+          </label>
+          <input class="form-control"
+                 id="name1"
+                 formControlName="name1"
+                 name="name1">
+          <div class="invalid-feedback d-inline"
+               *ngIf="!profileForm.get('name1').valid &&
+                profileForm.get('name1').touched">
+            <span *ngIf="profileForm.get('name1').errors.required">
+                          This field is required.
+            </span>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="surname">
+            Surname:
+          </label>
+          <input class="form-control"
+                 id="surname1"
+                 formControlName="surname1"
+                 name="surname1">
+          <div class="invalid-feedback d-inline"
+               *ngIf="!profileForm.get('surname1').valid &&
+                profileForm.get('surname1').touched">
+            <span *ngIf="profileForm.get('surname1').errors.required">
+                          This fields are required.
+            </span>
+            <span *ngIf="profileForm.get('surname1').errors.mustMatch">
+                          must match
+            </span>
+          </div>
+        </div>
+
+        <div formGroupName="profile">
+          <div class="form-group">
+            <label for="name">
+              Name:
+            </label>
+            <input class="form-control"
+                   id="name"
+                   formControlName="name"
+                   name="name">
+            <div class="invalid-feedback d-inline"
+                 *ngIf="!profileForm.get('profile.name').valid &&
+                profileForm.get('profile.name').touched">
+              This field is required.
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="surname">
+              Surname:
+            </label>
+            <input class="form-control"
+                   id="surname"
+                   formControlName="surname"
+                   name="surname">
+          </div>
+          <div class="invalid-feedback d-inline"
+               *ngIf="!profileForm.get('profile').valid &&
+                profileForm.get('profile').touched">
+            This fields are required.
+          </div>
+        </div>
+
+
+        <div class="form-row mt-3">
+          <div [ngClass]="{'col-md-6' : animalOption.controls.length,
+                'col-md-12': !animalOption.controls.length}">
+            <label for="animal">
+              Animal:
+            </label>
+            <select formControlName="animal"
+                    class="form-control"
+                    id="animal"
+                    name="animal"
+                    #animal
+                    (change)="selectAnimal(animal)">
+              <option *ngFor="let animal of animals"
+                      [value]="animal.id"
+              >{{animal.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-6" formArrayName="animalOption"
+               *ngFor="let animalOptionItem of animalOption.controls; let i=index">
+            <label>
+              AnimalOption {{i}}:
+            </label>
+            <div class="flex-row">
+              <input type="text"
+                     [formControlName]="i"
+                     class="form-control">
+            </div>
+            <div class="invalid-feedback d-inline"
+                 *ngIf="!animalOption.controls[i].valid &&
+                animalOption.controls[i].touched">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group mt-3" formArrayName="animalSelector"
+             *ngFor="let animalSelectorItem of animalSelector.controls; let i=index">
+          <label>
+            AnimalSelector {{i}}:
+          </label>
+          <div class="flex-row">
+            <input type="text"
+                   [formControlName]="i"
+                   class="form-control">
+          </div>
+          <div class="invalid-feedback d-inline"
+               *ngIf="!animalSelector.controls[i].valid &&
+                animalSelector.controls[i].touched">
+            This field is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label>Gender:</label>
+          <div class="custom-control custom-radio">
+            <div *ngFor="let gender of genders">
+              <input type="radio"
+                     name="gender"
+                     [id]="gender"
+                     class="custom-control-input"
+                     [value]="gender"
+                     formControlName="gender">
+              <label class="custom-control-label"
+                     [for]="gender">
+                {{gender}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div formArrayName="friends">
+          <button type="button" class="btn btn-primary mb-3" (click)="addFriends()">Add Friend</button>
+          <div class="form-group" *ngFor="let friend of friends.controls; let i=index">
+            <label>
+              Friend {{i}}:
+            </label>
+            <div class="flex-row">
+              <input type="text"
+                     [formControlName]=" i"
+                     class="form-control">
+              <button class="btn"
+                      type="button"
+                      (click)="removeFriend(i)">
+                &times;
+              </button>
+            </div>
+            <div class="invalid-feedback d-inline"
+                 *ngIf="!friends.controls[i].valid &&
+                friends.controls[i].touched">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mr-3" [disabled]="!profileForm.valid">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="getDataForm()">get data</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3" *ngFor="let user of users">
+        <div class="card-header">
+          {{user.profile.name}} {{user.profile.surname}}
+        </div>
+        <div class="card-body">
+          {{user.animal}} / {{user.gender}}
+          <div class="tab-pane" *ngFor="let friend of user.friends">
+            {{friend}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

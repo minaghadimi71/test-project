@@ -1,0 +1,115 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-8 offset-2 mb-3">
+          <form [formGroup]="profileBook"
+                (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label>
+                title:
+              </label>
+              <input name="title"
+                     type="text"
+                     formControlName="title"
+                     class="form-control">
+              <div class="invalid-feedback d-inline"
+                   *ngIf="!profileBook.get('title').valid
+                   && profileBook.get('title').touched">
+                Title is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                description:
+              </label>
+              <textarea name="description"
+                        type="text"
+                        formControlName="description"
+                        class="form-control">
+            </textarea>
+              <div class="invalid-feedback d-inline"
+                   *ngIf="!profileBook.get('description').valid
+                   && profileBook.get('description').touched">
+                Description is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label [tooltip] ='["item-1", "item-2"].join(" &#13;")' containerClass="mat-tooltip"
+                     placement="bottom" >
+                image:
+              </label>
+              <input name="image"
+                     type="text"
+                     formControlName="img"
+                     class="form-control"
+                     [(ngModel)]="imgUrl">
+            </div>
+              <button class="btn btn-primary mr-2"
+                      type="button"
+                      (click)="openAddNotification()">
+                Add Notification
+              </button>
+
+
+            <button type="submit"
+                    class="btn btn-primary mr-2"
+                    [disabled]="!profileBook.valid">
+              Add
+            </button>
+            <button type="button"
+                    class="btn btn-primary mr-2"
+                    (click)="navigate()" [tooltip]="mina" tooltipId="2">
+              navigate
+            </button>
+            <ng-template #mina>
+              <div class="card" style="background: red">
+                <h3>222222222</h3>
+              </div>
+
+            </ng-template>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <img [src]="imgUrl"
+           *ngIf="imgUrl"
+           class="bookImage">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGeFSBDMzXLfYybm_-RorwaPA9ngAI3PCb6mSYo8mdoJeDhpNP"
+        *ngIf="!imgUrl">
+      <div class="row mt-4">
+        <div class="col-12">
+          <table class="table table-borderless custom-notification">
+            <thead>
+            <tr>
+              <th scope="col"><i class="fa fa-bell fa-xs"></i></th>
+              <th scope="col">Industry</th>
+              <th scope="col">Country</th>
+              <th scope="col">Get</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i  of userNotifications">
+              <th scope="row"></th>
+              <td>{{i.industry}}</td>
+              <td>
+                 <span *ngIf="i.country === null; else elseBlock">
+                                                            All countries
+                                                        </span>
+
+                <ng-template
+                  #elseBlock>{{i.country ? i.country : 'All countries'}}</ng-template>
+              </td>
+              <td>{{i.duration? i.duration : "Once per week"}}</td>
+              <td><a (click)="remove(i)"><i class="fa fa-times fa-xs"></i></a> </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

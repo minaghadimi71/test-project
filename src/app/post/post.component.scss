@@ -1,0 +1,88 @@
+.control-label:after {
+  content: "*";
+  color: red;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+:host ::ng-deep tr {
+  border-bottom: 1px solid blue;
+  border-left: 1px solid blue;
+  border-right: 1px solid blue;
+  border-top: 1px solid blue;
+}
+
+:host ::ng-deep table {
+  width: 550px;
+}
+
+:host ::ng-deep th {
+  width: 110px;
+}
+
+:host ::ng-deep tr {
+  width: 550px;
+  height: 55px;
+  background-color: pink;
+}
+
+:host ::ng-deep td {
+  width: 110px;
+}
+
+:host ::ng-deep tbody {
+  width: 550px;
+}
+
+//@import "variable";
+//.scss {
+//  .main-content_p {
+//    color: #cd7c74;
+//  }
+//
+//  .main {
+//    @include backBlue;
+//    color: $color-red;
+//    //font-weight: map-get($font-weight, 'bold');
+//    font-weight: weight('bold');
+//  }
+//
+//  .main-content {
+//    //.main-content_p{
+//    //  color: $color-primary;
+//    //}
+//    //&_p{
+//    //  color: $color-primary;
+//    //}
+//    #{&}_p {
+//      color: $color-primary;
+//
+//      &:hover {
+//        color: red;
+//      }
+//    }
+//  }
+//
+//  .flex {
+//    @include flex-style(center);
+//  }
+//  .flex-1{
+//    @extend .flex;
+//    justify-content: space-between;
+//    //width: 80% - 40%;
+//    width: calc(80% - 400px);
+//    margin: 0 auto;
+//  }
+//}
+//
+//.theme {
+//  @include theme($light: true);
+//  @include mobile{
+//    color: red;
+//  }
+//}
+.disableDelete{
+  color: gray !important;
+}

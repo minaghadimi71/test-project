@@ -1,0 +1,40 @@
+<div class="container" style="margin-top: 20px">
+  <div class="row">
+    <div class="col-lg-4 col-sm-12">
+      <div class="form-group">
+        <label>
+          <strong>ngx-treeview</strong>
+        </label>
+        <ngx-treeview [config]="config" [items]="items" (filterChange)="onFilterChange($event)" (selectedChange)="categoryPush($event)" >
+        </ngx-treeview>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-12">
+      <div class="form-group">
+        <label>
+          <strong>show selected</strong>
+        </label>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let selectedItem of selectedItems">
+            {{selectedItem.text}} - {{selectedItem.value}}
+            <button type="button" class="close" (click)="removeItem(selectedItem)" [disabled]="disable">&times;</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-12">
+      <div class="form-group">
+        <label>
+          <strong>show Category</strong>
+        </label>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of items">
+            <a [routerLink]="['/subCategory', item.value]">
+            {{item.text}} - {{item.value}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

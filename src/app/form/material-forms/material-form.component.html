@@ -1,0 +1,13 @@
+<div class="container">
+  <form [formGroup]="materialForm">
+    <mat-form-field>
+      <input matInput type="text" formControlName="country" [matAutocomplete]="auto">
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let country of filteredOptions|async" [value]="country.name">
+        {{country.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </form>
+</div>
+

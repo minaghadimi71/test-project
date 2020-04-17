@@ -1,0 +1,63 @@
+<div class="background" (click)="closeModal()"></div>
+<div class="modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Change password</h4>
+        <button type="button" class="close" (click)="closeModal()">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form #passForm="ngForm" (ngSubmit)="changePassWord()">
+          <div class="form-group">
+            <label for="pass">
+              Password:
+            </label>
+            <input type="password"
+                   class="form-control"
+                   id="pass" name="pass"
+                   ngModel #pass="ngModel"
+                   required minlength="6" maxlength="12">
+            <div class="invalid-feedback d-inline" *ngIf="!pass.valid && pass.touched">
+              <span *ngIf="pass?.errors.required">
+                This field is required.
+              </span>
+              <span *ngIf="pass?.errors.minlength">
+                Min length for password is 6 Characters.
+              </span>
+              <span *ngIf="pass?.errors.maxlength">
+                Max length for password is 12 Characters.
+              </span>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPass">
+              Confirm Password:
+            </label>
+            <input type="password" class="form-control"
+                   id="confirmPass" name="confirmPass"
+                   ngModel #confirmPass="ngModel"
+                   required appPassValidator [pass]="pass.value" [disabled]="!pass.valid">
+            <div class="invalid-feedback d-inline" *ngIf="!confirmPass.valid && confirmPass.touched">
+              <span *ngIf="confirmPass?.errors && confirmPass?.errors.required">
+                This field is required.
+              </span>
+              <span *ngIf="confirmPass?.errors && confirmPass?.errors.appPassValidator">
+                Password and confirm password should be equal.
+              </span>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!passForm.valid">change password</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

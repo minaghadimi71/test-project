@@ -1,0 +1,14 @@
+<p class="mt-3">{{inOLCycle}}</p>
+<ng-content></ng-content>
+<p #element>ngOnChanges: After constructor and  called after the bound input property changes.</p>
+<p>ngOnInit: Called once the component is initialized.</p>
+<p>ngDoCheck: Called during every change detection run.</p>
+<p>ngAfterContentInit: Called after content (ng-content) has been projected into view.</p>
+<p>ngAfterContentChecked: Called every time the projected content has been checked.</p>
+<p>ngAfterViewInit: Called after the components view (and child view) has been initialized.</p>
+<p>ngAfterViewChecked: Called every time the view (and child views) has been checked.</p>
+<p>ngOnDestroy: Called once the component is about to be destroyed.</p>
+<button type="button" class="btn btn-primary mt-3 mb-3" (click)="clear()">Clear</button>
+<div *ngFor="let item of allItems">
+  <p>{{item}}</p>
+</div>
